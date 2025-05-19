@@ -1,0 +1,59 @@
+services:
+  qc:
+    image: ngs-pipeline-conda:latest
+    container_name: ngs-pipeline-qc
+    working_dir: /pipeline
+    volumes:
+      - ./data:/pipeline/data
+      - ./results:/pipeline/results
+      - ./scripts:/pipeline/scripts
+    command: ["/bin/bash", "scripts/qc.sh"]
+
+  trim:
+    image: ngs-pipeline-conda:latest
+    container_name: ngs-pipeline-trim
+    working_dir: /pipeline
+    volumes:
+      - ./data:/pipeline/data
+      - ./results:/pipeline/results
+      - ./scripts:/pipeline/scripts
+    command: ["/bin/bash", "scripts/trim.sh"]
+
+  map:
+    image: ngs-pipeline-conda:latest
+    container_name: ngs-pipeline-map
+    working_dir: /pipeline
+    volumes:
+      - ./data:/pipeline/data
+      - ./results:/pipeline/results
+      - ./scripts:/pipeline/scripts
+    command: ["/bin/bash", "scripts/map.sh"]
+
+  assemble:
+    image: ngs-pipeline-conda:latest
+    container_name: ngs-pipeline-assemble
+    working_dir: /pipeline
+    volumes:
+      - ./data:/pipeline/data
+      - ./results:/pipeline/results
+      - ./scripts:/pipeline/scripts
+    command: ["/bin/bash", "scripts/assembly.sh"]
+
+  variant_call:
+    image: ngs-pipeline-conda:latest
+    container_name: ngs-pipeline-variant
+    working_dir: /pipeline
+    volumes:
+      - ./data:/pipeline/data
+      - ./results:/pipeline/results
+      - ./scripts:/pipeline/scripts
+    command: ["/bin/bash", "scripts/variant.sh"]
+
+  run_pipeline:
+    image: ngs-pipeline-conda:latest
+    container_name: ngs-pipeline-run_pipeline
+    working_dir: /pipeline
+    volumes:
+      - .:/pipeline
+    command: ["/bin/bash", "/pipeline/run_pipeline.sh"]
+

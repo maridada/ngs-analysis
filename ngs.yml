@@ -1,0 +1,17 @@
+name: ngs-etl
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - fastqc
+  - trimmomatic
+  - spades
+  - bwa
+  - gatk4
+  - samtools
+  - pip
+  - pip:
+      - boto3  # AWS integration
+      - kubernetes  # K8s client via Python if needed

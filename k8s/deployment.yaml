@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ngs-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ngs-pipeline
+  template:
+    metadata:
+      labels:
+        app: ngs-pipeline
+    spec:
+      containers:
+      - name: pipeline
+        image: maridada/ngs-pipeline:latest
+        command: ["/opt/conda/bin/python", "/pipeline/main.py"]
+        volumeMounts:
+        - name: input-data
+          mountPath: /pipeline/data
+      volumes:
+      - name: input-data
+          hostPath:
+          path: /home/mariadada/ngs-pipeline/data
+          type: Directory
